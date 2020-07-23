@@ -45,7 +45,7 @@ int TMVAClassification( TString myMethodList = "" )
    Use["PDERS"]           = 1;
    Use["PDERSD"]          = 0;
    Use["PDERSPCA"]        = 0;
-   Use["PDEFoam"]         = 1;
+   Use["PDEFoam"]         = 0;
    Use["PDEFoamBoost"]    = 0; // uses generalised MVA method boosting
    Use["KNN"]             = 1; // k-nearest neighbour method
    //
@@ -78,7 +78,7 @@ int TMVAClassification( TString myMethodList = "" )
    //
    // Boosted Decision Trees
    Use["BDT"]             = 1; // uses Adaptive Boost
-   Use["BDTG"]            = 0; // uses Gradient Boost
+   Use["BDTG"]            = 1; // uses Gradient Boost
    Use["BDTB"]            = 0; // uses Bagging
    Use["BDTD"]            = 0; // decorrelation + Adaptive Boost
    Use["BDTF"]            = 0; // allow usage of fisher discriminant for node splitting
@@ -148,11 +148,12 @@ int TMVAClassification( TString myMethodList = "" )
    // Define the input variables that shall be used for the MVA training
    // note that you may also use variable expressions, such as: "3*var1/var2*abs(var3)"
    // [all types of expressions that can also be parsed by TTree::Draw( "expression" )]
-   dataloader->AddVariable( "tau_M", 'F' );
-   dataloader->AddVariable( "tau_E", 'F' );
-   dataloader->AddVariable( "tau_PX",'F' );
-   dataloader->AddVariable( "tau_PY", 'F' );
-   dataloader->AddVariable( "tau_PZ", 'F' );
+   // dataloader->AddVariable( "tau_M", 'F' );
+   // dataloader->AddVariable( "tau_E", 'F' );
+   // dataloader->AddVariable( "tau_PX",'F' );
+   // dataloader->AddVariable( "tau_PY", 'F' );
+   // dataloader->AddVariable( "tau_PZ", 'F' );
+   dataloader->AddVariable( "tau_PT", 'F' );
    dataloader->AddVariable( "tau_ConeMultMuon_1", 'F' );
    dataloader->AddVariable( "tau_ConeMultMuon_2", 'F' );
    dataloader->AddVariable( "tau_ConeMultMuon_3", 'F' );
@@ -184,7 +185,7 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "tau_ENDVERTEX_Z", 'F' );
    // dataloader->AddVariable( "tau_ENDVERTEX_CHI2", 'F' );
    // dataloader->AddVariable( "tau_IPCHI2_OWNPV", 'F' );
-   // dataloader->AddVariable( "tau_flightdistance", 'F' );
+   dataloader->AddVariable( "tau_flightdistance", 'F' );
    // dataloader->AddVariable( "tau_TAU", 'F' );
 
    // dataloader->AddVariable( "mu1_M", 'F' );
@@ -192,7 +193,7 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu1_PX", 'F' );
    // dataloader->AddVariable( "mu1_PY", 'F' );
    // dataloader->AddVariable( "mu1_PZ", 'F' );
-   // dataloader->AddVariable( "mu1_PT", 'F' );
+   dataloader->AddVariable( "mu1_PT", 'F' );
    // dataloader->AddVariable( "mu1_ID", 'F' );
    // dataloader->AddVariable( "mu1_TRACK_CHI2NDOF", 'F' );
    // dataloader->AddVariable( "mu1_IPCHI2_OWNPV", 'F' );
@@ -204,7 +205,7 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu2_PX", 'F' );
    // dataloader->AddVariable( "mu2_PY", 'F' );
    // dataloader->AddVariable( "mu2_PZ", 'F' );
-   // dataloader->AddVariable( "mu2_PT", 'F' );
+   dataloader->AddVariable( "mu2_PT", 'F' );
    // dataloader->AddVariable( "mu2_ID", 'F' );
    // dataloader->AddVariable( "mu2_TRACK_CHI2NDOF", 'F' );
    // dataloader->AddVariable( "mu2_IPCHI2_OWNPV", 'F' );
@@ -216,7 +217,7 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu3_PX", 'F' );
    // dataloader->AddVariable( "mu3_PY",'F' );
    // dataloader->AddVariable( "mu3_PZ", 'F' );
-   // dataloader->AddVariable( "mu3_PT", 'F' );
+   dataloader->AddVariable( "mu3_PT", 'F' );
    // dataloader->AddVariable( "mu3_ID", 'F' );
    // dataloader->AddVariable( "mu3_TRACK_CHI2NDOF", 'F' );
    // dataloader->AddVariable( "mu3_IPCHI2_OWNPV", 'F' );
