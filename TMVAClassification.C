@@ -108,7 +108,7 @@ int TMVAClassification( TString myMethodList = "" )
    // Read training and test data
    // (it is also possible to use ASCII format as input -> see TMVA Users Guide)
    TFile *input(0);
-   TString fname = "./Data_2018MagDown_file1_trimmed.root";
+   TString fname = "./MC2018_MagDown_21513012.root";
    if (!gSystem->AccessPathName( fname )) {
       input = TFile::Open( fname ); // check if file in local directory exists
    }
@@ -122,8 +122,8 @@ int TMVAClassification( TString myMethodList = "" )
    }
    std::cout << "--- TMVAClassification       : Using input file: " << input->GetName() << std::endl;
    // Register the training and test trees
-   TTree *signalTree     = (TTree*)input->Get("SignalTree");
-   TTree *background     = (TTree*)input->Get("BackgroundTree");
+   TTree *signalTree     = (TTree*)input->Get("DecayTree");
+   // TTree *background     = (TTree*)input->Get("BackgroundTree");
    // Create a ROOT output file where TMVA will store ntuples, histograms, etc.
    TString outfileName( "TMVA.root" );
    TFile* outputFile = TFile::Open( outfileName, "RECREATE" );
@@ -153,10 +153,11 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "tau_PX",'F' );
    // dataloader->AddVariable( "tau_PY", 'F' );
    // dataloader->AddVariable( "tau_PZ", 'F' );
-   dataloader->AddVariable( "tau_PT", 'F' );
-   // dataloader->AddVariable( "tau_ConeMultMuon_1", 'F' );
-   // dataloader->AddVariable( "tau_ConeMultMuon_2", 'F' );
-   // dataloader->AddVariable( "tau_ConeMultMuon_3", 'F' );
+   dataloader->AddVariable( "tau_P", 'F' ); //+ 
+   dataloader->AddVariable( "tau_PT", 'F' ); //+ 
+   dataloader->AddVariable( "tau_ConeMultMuon_1", 'F' ); //+
+   dataloader->AddVariable( "tau_ConeMultMuon_2", 'F' ); //+
+   dataloader->AddVariable( "tau_ConeMultMuon_3", 'F' ); //+
    // dataloader->AddVariable( "tau_TRKISOBDTLONG_D1MAX1_01", 'F' );
    // dataloader->AddVariable( "tau_TRKISOBDTLONG_D1MAX1_12", 'F' );
    // dataloader->AddVariable( "tau_TRKISOBDTLONG_D2MAX1_02", 'F' );
@@ -183,9 +184,10 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "tau_ENDVERTEX_X", 'F' );
    // dataloader->AddVariable( "tau_ENDVERTEX_Y", 'F' );
    // dataloader->AddVariable( "tau_ENDVERTEX_Z", 'F' );
-   // dataloader->AddVariable( "tau_ENDVERTEX_CHI2", 'F' );
-   // dataloader->AddVariable( "tau_IPCHI2_OWNPV", 'F' ); +
-   // dataloader->AddVariable( "tau_flightdistance", 'F' ); 
+   dataloader->AddVariable( "tau_ENDVERTEX_CHI2", 'F' ); //+
+   // dataloader->AddVariable( "tau_IPCHI2_OWNPV", 'F' ); 
+   dataloader->AddVariable( "tau_FD_OWNPV", 'F' ); //+
+   dataloader->AddVariable( "tau_FD_OWNPV_CHI2", 'F' ); //+
    // dataloader->AddVariable( "tau_TAU", 'F' );
 
    // dataloader->AddVariable( "mu1_M", 'F' );
@@ -195,7 +197,7 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu1_PZ", 'F' );
    // dataloader->AddVariable( "mu1_PT", 'F' );
    // dataloader->AddVariable( "mu1_ID", 'F' );
-   // dataloader->AddVariable( "mu1_TRACK_CHI2NDOF", 'F' ); 
+   dataloader->AddVariable( "mup1_TRACK_CHI2NDOF", 'F' ); //+
    // dataloader->AddVariable( "mu1_IPCHI2_OWNPV", 'F' );
    // dataloader->AddVariable( "mu1_ProbNNghost", 'F' );
    // dataloader->AddVariable( "mu1_TRACK_GhostProb", 'F' );
@@ -207,7 +209,7 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu2_PZ", 'F' );
    // dataloader->AddVariable( "mu2_PT", 'F' );
    // dataloader->AddVariable( "mu2_ID", 'F' );
-   // dataloader->AddVariable( "mu2_TRACK_CHI2NDOF", 'F' ); 
+   dataloader->AddVariable( "mum_TRACK_CHI2NDOF", 'F' ); //+
    // dataloader->AddVariable( "mu2_IPCHI2_OWNPV", 'F' );
    // dataloader->AddVariable( "mu2_ProbNNghost", 'F' );
    // dataloader->AddVariable( "mu2_TRACK_GhostProb", 'F' );
@@ -219,7 +221,7 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu3_PZ", 'F' );
    // dataloader->AddVariable( "mu3_PT", 'F' );
    // dataloader->AddVariable( "mu3_ID", 'F' );
-   // dataloader->AddVariable( "mu3_TRACK_CHI2NDOF", 'F' ); 
+   dataloader->AddVariable( "mup2_TRACK_CHI2NDOF", 'F' ); //+
    // dataloader->AddVariable( "mu3_IPCHI2_OWNPV", 'F' );
    // dataloader->AddVariable( "mu3_ProbNNghost", 'F' );
    // dataloader->AddVariable( "mu3_TRACK_GhostProb", 'F' );
