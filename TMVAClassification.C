@@ -28,36 +28,36 @@ int TMVAClassification( TString myMethodList = "" )
    // Default MVA methods to be trained + tested
    std::map<std::string,int> Use;
    // Cut optimisation
-   Use["Cuts"]            = 1;
-   Use["CutsD"]           = 1;
+   Use["Cuts"]            = 0;
+   Use["CutsD"]           = 0;
    Use["CutsPCA"]         = 0;
    Use["CutsGA"]          = 0;
    Use["CutsSA"]          = 0;
    //
    // 1-dimensional likelihood ("naive Bayes estimator")
-   Use["Likelihood"]      = 1;
+   Use["Likelihood"]      = 0;
    Use["LikelihoodD"]     = 0; // the "D" extension indicates decorrelated input variables (see option strings)
-   Use["LikelihoodPCA"]   = 1; // the "PCA" extension indicates PCA-transformed input variables (see option strings)
+   Use["LikelihoodPCA"]   = 0; // the "PCA" extension indicates PCA-transformed input variables (see option strings)
    Use["LikelihoodKDE"]   = 0;
    Use["LikelihoodMIX"]   = 0;
    //
    // Mutidimensional likelihood and Nearest-Neighbour methods
-   Use["PDERS"]           = 1;
+   Use["PDERS"]           = 0;
    Use["PDERSD"]          = 0;
    Use["PDERSPCA"]        = 0;
    Use["PDEFoam"]         = 0;
    Use["PDEFoamBoost"]    = 0; // uses generalised MVA method boosting
-   Use["KNN"]             = 1; // k-nearest neighbour method
+   Use["KNN"]             = 0; // k-nearest neighbour method
    //
    // Linear Discriminant Analysis
-   Use["LD"]              = 1; // Linear Discriminant identical to Fisher
+   Use["LD"]              = 0; // Linear Discriminant identical to Fisher
    Use["Fisher"]          = 0;
    Use["FisherG"]         = 0;
    Use["BoostedFisher"]   = 0; // uses generalised MVA method boosting
    Use["HMatrix"]         = 0;
    //
    // Function Discriminant analysis
-   Use["FDA_GA"]          = 1; // minimisation of user-defined function using Genetics Algorithm
+   Use["FDA_GA"]          = 0; // minimisation of user-defined function using Genetics Algorithm
    Use["FDA_SA"]          = 0;
    Use["FDA_MC"]          = 0;
    Use["FDA_MT"]          = 0;
@@ -67,24 +67,24 @@ int TMVAClassification( TString myMethodList = "" )
    // Neural Networks (all are feed-forward Multilayer Perceptrons)
    Use["MLP"]             = 0; // Recommended ANN
    Use["MLPBFGS"]         = 0; // Recommended ANN with optional training method
-   Use["MLPBNN"]          = 1; // Recommended ANN with BFGS training method and bayesian regulator
+   Use["MLPBNN"]          = 0; // Recommended ANN with BFGS training method and bayesian regulator
    Use["CFMlpANN"]        = 0; // Depreciated ANN from ALEPH
    Use["TMlpANN"]         = 0; // ROOT's own ANN
    Use["DNN_GPU"]         = 0; // CUDA-accelerated DNN training.
    Use["DNN_CPU"]         = 0; // Multi-core accelerated DNN.
    //
    // Support Vector Machine
-   Use["SVM"]             = 1;
+   Use["SVM"]             = 0;
    //
    // Boosted Decision Trees
    Use["BDT"]             = 1; // uses Adaptive Boost
-   Use["BDTG"]            = 1; // uses Gradient Boost
+   Use["BDTG"]            = 0; // uses Gradient Boost
    Use["BDTB"]            = 0; // uses Bagging
    Use["BDTD"]            = 0; // decorrelation + Adaptive Boost
    Use["BDTF"]            = 0; // allow usage of fisher discriminant for node splitting
    //
    // Friedman's RuleFit method, ie, an optimised series of cuts ("rules")
-   Use["RuleFit"]         = 1;
+   Use["RuleFit"]         = 0;
    // ---------------------------------------------------------------
    std::cout << std::endl;
    std::cout << "==> Start TMVAClassification" << std::endl;
@@ -154,9 +154,9 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "tau_PY", 'F' );
    // dataloader->AddVariable( "tau_PZ", 'F' );
    dataloader->AddVariable( "tau_PT", 'F' );
-   dataloader->AddVariable( "tau_ConeMultMuon_1", 'F' );
-   dataloader->AddVariable( "tau_ConeMultMuon_2", 'F' );
-   dataloader->AddVariable( "tau_ConeMultMuon_3", 'F' );
+   // dataloader->AddVariable( "tau_ConeMultMuon_1", 'F' );
+   // dataloader->AddVariable( "tau_ConeMultMuon_2", 'F' );
+   // dataloader->AddVariable( "tau_ConeMultMuon_3", 'F' );
    // dataloader->AddVariable( "tau_TRKISOBDTLONG_D1MAX1_01", 'F' );
    // dataloader->AddVariable( "tau_TRKISOBDTLONG_D1MAX1_12", 'F' );
    // dataloader->AddVariable( "tau_TRKISOBDTLONG_D2MAX1_02", 'F' );
@@ -184,8 +184,8 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "tau_ENDVERTEX_Y", 'F' );
    // dataloader->AddVariable( "tau_ENDVERTEX_Z", 'F' );
    // dataloader->AddVariable( "tau_ENDVERTEX_CHI2", 'F' );
-   // dataloader->AddVariable( "tau_IPCHI2_OWNPV", 'F' );
-   dataloader->AddVariable( "tau_flightdistance", 'F' );
+   // dataloader->AddVariable( "tau_IPCHI2_OWNPV", 'F' ); +
+   // dataloader->AddVariable( "tau_flightdistance", 'F' ); 
    // dataloader->AddVariable( "tau_TAU", 'F' );
 
    // dataloader->AddVariable( "mu1_M", 'F' );
@@ -193,9 +193,9 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu1_PX", 'F' );
    // dataloader->AddVariable( "mu1_PY", 'F' );
    // dataloader->AddVariable( "mu1_PZ", 'F' );
-   dataloader->AddVariable( "mu1_PT", 'F' );
+   // dataloader->AddVariable( "mu1_PT", 'F' );
    // dataloader->AddVariable( "mu1_ID", 'F' );
-   // dataloader->AddVariable( "mu1_TRACK_CHI2NDOF", 'F' );
+   // dataloader->AddVariable( "mu1_TRACK_CHI2NDOF", 'F' ); 
    // dataloader->AddVariable( "mu1_IPCHI2_OWNPV", 'F' );
    // dataloader->AddVariable( "mu1_ProbNNghost", 'F' );
    // dataloader->AddVariable( "mu1_TRACK_GhostProb", 'F' );
@@ -205,9 +205,9 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu2_PX", 'F' );
    // dataloader->AddVariable( "mu2_PY", 'F' );
    // dataloader->AddVariable( "mu2_PZ", 'F' );
-   dataloader->AddVariable( "mu2_PT", 'F' );
+   // dataloader->AddVariable( "mu2_PT", 'F' );
    // dataloader->AddVariable( "mu2_ID", 'F' );
-   // dataloader->AddVariable( "mu2_TRACK_CHI2NDOF", 'F' );
+   // dataloader->AddVariable( "mu2_TRACK_CHI2NDOF", 'F' ); 
    // dataloader->AddVariable( "mu2_IPCHI2_OWNPV", 'F' );
    // dataloader->AddVariable( "mu2_ProbNNghost", 'F' );
    // dataloader->AddVariable( "mu2_TRACK_GhostProb", 'F' );
@@ -217,9 +217,9 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "mu3_PX", 'F' );
    // dataloader->AddVariable( "mu3_PY",'F' );
    // dataloader->AddVariable( "mu3_PZ", 'F' );
-   dataloader->AddVariable( "mu3_PT", 'F' );
+   // dataloader->AddVariable( "mu3_PT", 'F' );
    // dataloader->AddVariable( "mu3_ID", 'F' );
-   // dataloader->AddVariable( "mu3_TRACK_CHI2NDOF", 'F' );
+   // dataloader->AddVariable( "mu3_TRACK_CHI2NDOF", 'F' ); 
    // dataloader->AddVariable( "mu3_IPCHI2_OWNPV", 'F' );
    // dataloader->AddVariable( "mu3_ProbNNghost", 'F' );
    // dataloader->AddVariable( "mu3_TRACK_GhostProb", 'F' );
