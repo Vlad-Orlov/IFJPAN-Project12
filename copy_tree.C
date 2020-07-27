@@ -1,4 +1,4 @@
-void copy_tree_try(){
+void copy_tree(){
     TFile *f = new TFile("data.root", "update");
     TTree *T = (TTree*)f->Get("T");
 
