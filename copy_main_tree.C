@@ -1,4 +1,4 @@
-void copy_tree(){
+void copy_main_tree(){
     TFile *f = new TFile("MC2018_MagDown_21513012_withbckg.root", "update");
     TTree *T = (TTree*)f->Get("BackgroundTree");
 
