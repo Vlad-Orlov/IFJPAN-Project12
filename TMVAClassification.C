@@ -108,7 +108,9 @@ int TMVAClassification( TString myMethodList = "" )
    // Read training and test data
    // (it is also possible to use ASCII format as input -> see TMVA Users Guide)
    TFile *input(0);
-   TString fname = "./MC2018_MagDown_21513012.root";
+   TString fname = "./selected_data.root";
+      // TString fname = "./Data_2018MagDown_file1_trimmed.root";
+
    if (!gSystem->AccessPathName( fname )) {
       input = TFile::Open( fname ); // check if file in local directory exists
    }
@@ -123,7 +125,9 @@ int TMVAClassification( TString myMethodList = "" )
    std::cout << "--- TMVAClassification       : Using input file: " << input->GetName() << std::endl;
    // Register the training and test trees
    TTree *signalTree     = (TTree*)input->Get("DecayTree");
-   // TTree *background     = (TTree*)input->Get("BackgroundTree");
+   TTree *background     = (TTree*)input->Get("BackgroundTree");
+
+
    // Create a ROOT output file where TMVA will store ntuples, histograms, etc.
    TString outfileName( "TMVA.root" );
    TFile* outputFile = TFile::Open( outfileName, "RECREATE" );
@@ -144,7 +148,7 @@ int TMVAClassification( TString myMethodList = "" )
    // (please check "src/Config.h" to see all available global options)
    //
    //    (TMVA::gConfig().GetVariablePlotting()).fTimesRMS = 8.0;
-   //    (TMVA::gConfig().GetIONames()).fWeightFileDir = "myWeightDirectory";
+   //    (TMVA::gConfig().GetIONames()).fWeightFileDir = "myWeightDirectory"
    // Define the input variables that shall be used for the MVA training
    // note that you may also use variable expressions, such as: "3*var1/var2*abs(var3)"
    // [all types of expressions that can also be parsed by TTree::Draw( "expression" )]
@@ -153,7 +157,7 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "tau_PX",'F' );
    // dataloader->AddVariable( "tau_PY", 'F' );
    // dataloader->AddVariable( "tau_PZ", 'F' );
-   dataloader->AddVariable( "tau_P", 'F' ); //+ 
+   // dataloader->AddVariable( "tau_P", 'F' ); //+ 
    dataloader->AddVariable( "tau_PT", 'F' ); //+ 
    dataloader->AddVariable( "tau_ConeMultMuon_1", 'F' ); //+
    dataloader->AddVariable( "tau_ConeMultMuon_2", 'F' ); //+
@@ -184,10 +188,10 @@ int TMVAClassification( TString myMethodList = "" )
    // dataloader->AddVariable( "tau_ENDVERTEX_X", 'F' );
    // dataloader->AddVariable( "tau_ENDVERTEX_Y", 'F' );
    // dataloader->AddVariable( "tau_ENDVERTEX_Z", 'F' );
-   dataloader->AddVariable( "tau_ENDVERTEX_CHI2", 'F' ); //+
+   // dataloader->AddVariable( "tau_ENDVERTEX_CHI2", 'F' ); //+
    // dataloader->AddVariable( "tau_IPCHI2_OWNPV", 'F' ); 
-   dataloader->AddVariable( "tau_FD_OWNPV", 'F' ); //+
-   dataloader->AddVariable( "tau_FD_OWNPV_CHI2", 'F' ); //+
+   dataloader->AddVariable( "tau_FD", 'F' ); //+
+   // dataloader->AddVariable( "tau_FD_OWNPV_CHI2", 'F' ); //+
    // dataloader->AddVariable( "tau_TAU", 'F' );
 
    // dataloader->AddVariable( "mu1_M", 'F' );
